@@ -19,6 +19,7 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
+import { loadSaveData, saveData } from "./utils/storage";
 
 const SAVE_KEY = "fun-always-road-trip-v1";
 

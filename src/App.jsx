@@ -90,6 +90,7 @@ const DEFAULT_STATS = {
   gamesPlayed: 0,
   totalWins: 0,
   tictactoeWins: 0,
+  aiVictories: 0,
   hangmanSolved: 0,
   dotsWins: 0,
   questionsPlayed: 0,

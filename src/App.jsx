@@ -434,7 +434,8 @@ const state = STATES[stateIndex];
   </button>
 </div>  
   <p className="text-2xl font-black">
-  States Collected: {stats.statesCollected?.length || 0}/50      
+  States Collected: {stats.statesCollected?.length || 0}/50
+  </p>
   <p className="text-xl font-black">Nickname: {state.nickname}</p>
   <p className="text-xl font-black">Capital: {state.capital}</p>
   <p className="text-xl font-black">Statehood: {state.statehood}</p>

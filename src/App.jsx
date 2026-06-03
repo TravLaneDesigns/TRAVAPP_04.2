@@ -397,9 +397,10 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
   );
 }
 
-function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
+function PassportPage({ setPage, paperVariant, rotatePaper, stats, addStateStamp }) {
   const [stateIndex, setStateIndex] = useState(0);
 const state = STATES[stateIndex];
+  const collected = stats.statesCollected?.includes(state.id);
   return (
     <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
       <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
@@ -437,7 +438,19 @@ const state = STATES[stateIndex];
   <p className="text-xl font-black">Bird: {state.bird}</p>
   <p className="text-xl font-black">Flower: {state.flower}</p>
   <p className="text-xl font-black">Fun Fact: {state.funFact}</p>
-</HandCard>
+{collected ? (
+  <div className="rounded-xl border-2 border-green-700 bg-green-100 p-3 text-xl font-black">
+    ✅ Stamp Collected
+  </div>
+) : (
+  <button
+    onClick={() => addStateStamp(state.id)}
+    className="rounded-xl border-2 border-slate-950 bg-yellow-100 px-4 py-2 text-xl font-black"
+  >
+    Add Stamp
+  </button>
+)}
+      </HandCard>
     </NotebookPage>
   );
 }
@@ -536,6 +549,22 @@ export default function App() {
   const updateSettings = (patch) => setSettings((current) => ({ ...current, ...patch }));
   const rotatePaper = () => settings.paperMode === "Random" ? setPaperVariant((current) => (current + 1) % PAPER_VARIANTS.length) : setPaperVariant(settings.lockedPaper);
   const addStats = (patch) => setStats((current) => { const next = { ...current }; Object.entries(patch).forEach(([key, value]) => { next[key] = (next[key] || 0) + value; }); return next; });
+  const addStateStamp = (stateId) => {
+  setStats((current) => {
+    const collected = current.statesCollected || [];
+
+    if (collected.includes(stateId)) {
+      return current;
+    }
+
+    return {
+      ...current,
+      statesCollected: [...collected, stateId],
+      xp: (current.xp || 0) + 10,
+      roadTokens: (current.roadTokens || 0) + 1,
+    };
+  });
+};
   const finishOwner = () => { const clean = ownerName.trim() || "Player"; setOwnerName(clean); setStats((current) => ({ ...current, ownerName: clean })); setOwnerReady(true); };
   const resetStats = () => setStats({ ...DEFAULT_STATS, ownerName: ownerName || "Player" });
 
@@ -547,7 +576,7 @@ export default function App() {
   <>
     {page === "home" && <Home setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
     {page === "game" && <GAMEPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
-    {page === "passport" && <PassportPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "passport" && <PassportPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} addStateStamp={addStateStamp} />}
     {page === "settings" && <SettingsPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} settings={settings} updateSettings={updateSettings} resetStats={resetStats} />}
     {page === "stickers" && <StickerBook setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
     {page === "journal" && <TripJournal setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}

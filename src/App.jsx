@@ -113,7 +113,6 @@ journalOpens: 0,
 stickersCollected: 0,
 };
 const STATES = [
-  const STATES = [
   {
     id: "PA",
     name: "Pennsylvania",

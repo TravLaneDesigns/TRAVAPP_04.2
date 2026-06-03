@@ -479,6 +479,19 @@ export default function App() {
   if (!ownerReady) return <OwnerPage ownerName={ownerName} setOwnerName={setOwnerName} finishOwner={finishOwner} />;
   if (page.startsWith("rules:")) { const gameId = page.split(":")[1]; const titles = { tictactoe: "Tic-Tac-Toe", hangman: "Hangman", dots: "Dots & Boxes", questions: "20 Questions", rps: "Rock Paper Scissors" }; return <RulesPage gameId={gameId} title={titles[gameId]} setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} ownerName={stats.ownerName} />; }
 
-  return <>{page === "home" && <Home setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "settings" && <SettingsPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} {page === "game" && <GAMEPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
-{page === "passport" && <PassportPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />} settings={settings} updateSettings={updateSettings} resetStats={resetStats} />}{page === "stickers" && <StickerBook setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "journal" && <TripJournal setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "tictactoe" && <TicTacToe setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "hangman" && <Hangman setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "dots" && <DotsAndBoxes setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "questions" && <TwentyQuestions setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "rps" && <RockPaperScissors setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}</>;
+ return (
+  <>
+    {page === "home" && <Home setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "game" && <GAMEPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "passport" && <PassportPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "settings" && <SettingsPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} settings={settings} updateSettings={updateSettings} resetStats={resetStats} />}
+    {page === "stickers" && <StickerBook setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "journal" && <TripJournal setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+    {page === "tictactoe" && <TicTacToe setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}
+    {page === "hangman" && <Hangman setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}
+    {page === "dots" && <DotsAndBoxes setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}
+    {page === "questions" && <TwentyQuestions setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}
+    {page === "rps" && <RockPaperScissors setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}
+  </>
+); 
 }

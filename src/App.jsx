@@ -98,6 +98,19 @@ const DEFAULT_STATS = {
   rpsLosses: 0,
   rpsTies: 0,
   boxesClaimed: 0,
+  xp: 0,
+roadTokens: 0,
+stickerCredits: 0,
+fartFragments: 0,
+
+statesCollected: [],
+landmarksCollected: [],
+secretAchievements: [],
+
+dailyGoalsCompleted: 0,
+appOpens: 0,
+journalOpens: 0,
+stickersCollected: 0,
 };
 
 function Button({ children, onClick, className = "", type = "button" }) {
@@ -270,6 +283,11 @@ function Home({ setPage, paperVariant, rotatePaper, stats }) {
     { id: "rps", title: "Rock Paper Scissors", icon: <Scissors className="h-8 w-8" />, desc: "Fast rounds with scorekeeping." },
   ];
   const unlockedCount = STICKERS.filter((s) => s.unlocked(stats)).length;
+  const menuCards = [
+  { id: "game", title: "G.A.M.E.", icon: <Trophy className="h-8 w-8" />, desc: "Goals, Achievements, Milestones, and Extras." },
+  { id: "journal", title: "Trip Journal", icon: <NotebookTabs className="h-8 w-8" />, desc: "Stats, notes, and road memories." },
+  { id: "stickers", title: "Sticker Book", icon: <Star className="h-8 w-8" />, desc: "See your unlocked stickers." },
+];
   return (
     <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
       <div className="space-y-8 pb-8">
@@ -282,11 +300,13 @@ function Home({ setPage, paperVariant, rotatePaper, stats }) {
                 <p className="text-slate-700 mt-1 text-lg"><CrayonText>Pick a game and have fun!</CrayonText></p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <button onClick={() => { rotatePaper(); setPage("journal"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-[-2deg]"><NotebookTabs className="h-7 w-7" /></button>
-              <button onClick={() => { rotatePaper(); setPage("stickers"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-2"><Star className="h-7 w-7" /></button>
-              <button onClick={() => { rotatePaper(); setPage("settings"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-3"><Settings className="h-7 w-7" /></button>
-            </div>
+            <<div className="flex gap-2">
+  <button onClick={() => { rotatePaper(); setPage("game"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-[-3deg]"><Trophy className="h-7 w-7" /></button>
+  <button onClick={() => { rotatePaper(); setPage("passport"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-1"><Map className="h-7 w-7" /></button>
+  <button onClick={() => { rotatePaper(); setPage("journal"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-[-2deg]"><NotebookTabs className="h-7 w-7" /></button>
+  <button onClick={() => { rotatePaper(); setPage("stickers"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-2"><Star className="h-7 w-7" /></button>
+  <button onClick={() => { rotatePaper(); setPage("settings"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-3"><Settings className="h-7 w-7" /></button>
+</div>
           </div>
           <div className="flex items-center gap-3 text-yellow-700"><Star className="fill-current" /><span className="text-slate-800"><CrayonText>🚗 road trip games • {unlockedCount}/{STICKERS.length} stickers</CrayonText></span><Star className="fill-current" /></div>
         </header>
@@ -311,7 +331,52 @@ function SettingsPage({ setPage, paperVariant, rotatePaper, settings, updateSett
     </NotebookPage>
   );
 }
+function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
+  const unlockedCount = STICKERS.filter((s) => s.unlocked(stats)).length;
 
+  return (
+    <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <ScribbleButton variant="secondary" onClick={() => { rotatePaper(); setPage("home"); }}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Menu
+        </ScribbleButton>
+        <h1 className="text-4xl sm:text-6xl uppercase underline decoration-blue-500 underline-offset-8">
+          <MarkerTitle>G.A.M.E.</MarkerTitle>
+        </h1>
+        <div className="text-4xl">🏆</div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pb-8">
+        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Goals</MarkerTitle></h2><p className="text-xl font-black mt-3">Coming soon.</p></HandCard>
+        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2><p className="text-xl font-black mt-3">{unlockedCount}/{STICKERS.length} unlocked.</p></HandCard>
+        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2><p className="text-xl font-black mt-3">{stats.gamesPlayed} games played.</p></HandCard>
+        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>
+      </div>
+    </NotebookPage>
+  );
+}
+
+function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
+  return (
+    <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <ScribbleButton variant="secondary" onClick={() => { rotatePaper(); setPage("home"); }}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Menu
+        </ScribbleButton>
+        <h1 className="text-4xl sm:text-6xl uppercase underline decoration-blue-500 underline-offset-8">
+          <MarkerTitle>Passport</MarkerTitle>
+        </h1>
+        <div className="text-4xl">🇺🇸</div>
+      </div>
+
+      <HandCard className="p-6 space-y-3">
+        <h2 className="text-3xl"><MarkerTitle>State Passport</MarkerTitle></h2>
+        <p className="text-xl font-black">States Collected: {stats.statesCollected?.length || 0}/50</p>
+        <p className="text-xl font-black text-slate-700">State stamps, fun facts, and the living map will live here.</p>
+      </HandCard>
+    </NotebookPage>
+  );
+}
 function StickerBook({ setPage, paperVariant, rotatePaper, stats }) {
   return <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}><div className="flex flex-wrap justify-between items-center gap-3 mb-6"><ScribbleButton variant="secondary" onClick={() => { rotatePaper(); setPage("home"); }}><ArrowLeft className="mr-2 h-4 w-4" /> Menu</ScribbleButton><h1 className="text-4xl sm:text-6xl uppercase underline decoration-blue-500 underline-offset-8"><MarkerTitle>Sticker Book</MarkerTitle></h1><div className="text-4xl">🦖</div></div><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pb-8">{STICKERS.map((sticker, i) => { const unlocked = sticker.unlocked(stats); return <HandCard key={sticker.id} className={`p-5 text-center min-h-44 transition ${unlocked ? "rotate-[-1deg]" : "opacity-55 grayscale"}`}><div className="text-5xl mb-2">{unlocked ? sticker.icon : "⬜"}</div><h2 className="text-2xl"><CrayonText>{unlocked ? sticker.name : "Mystery Sticker"}</CrayonText></h2><p className="text-slate-700 mt-2"><CrayonText>{unlocked ? "Unlocked!" : sticker.rule}</CrayonText></p><p className="text-xs font-black mt-3 text-slate-500">#{i + 1}</p></HandCard>; })}</div></NotebookPage>;
 }
@@ -414,5 +479,6 @@ export default function App() {
   if (!ownerReady) return <OwnerPage ownerName={ownerName} setOwnerName={setOwnerName} finishOwner={finishOwner} />;
   if (page.startsWith("rules:")) { const gameId = page.split(":")[1]; const titles = { tictactoe: "Tic-Tac-Toe", hangman: "Hangman", dots: "Dots & Boxes", questions: "20 Questions", rps: "Rock Paper Scissors" }; return <RulesPage gameId={gameId} title={titles[gameId]} setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} ownerName={stats.ownerName} />; }
 
-  return <>{page === "home" && <Home setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "settings" && <SettingsPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} settings={settings} updateSettings={updateSettings} resetStats={resetStats} />}{page === "stickers" && <StickerBook setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "journal" && <TripJournal setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "tictactoe" && <TicTacToe setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "hangman" && <Hangman setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "dots" && <DotsAndBoxes setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "questions" && <TwentyQuestions setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "rps" && <RockPaperScissors setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}</>;
+  return <>{page === "home" && <Home setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "settings" && <SettingsPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} {page === "game" && <GAMEPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}
+{page === "passport" && <PassportPage setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />} settings={settings} updateSettings={updateSettings} resetStats={resetStats} />}{page === "stickers" && <StickerBook setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "journal" && <TripJournal setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} stats={stats} />}{page === "tictactoe" && <TicTacToe setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "hangman" && <Hangman setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "dots" && <DotsAndBoxes setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "questions" && <TwentyQuestions setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}{page === "rps" && <RockPaperScissors setPage={setPage} paperVariant={paperVariant} rotatePaper={rotatePaper} addStats={addStats} />}</>;
 }

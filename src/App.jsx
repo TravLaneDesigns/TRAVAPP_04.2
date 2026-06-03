@@ -300,7 +300,7 @@ function Home({ setPage, paperVariant, rotatePaper, stats }) {
                 <p className="text-slate-700 mt-1 text-lg"><CrayonText>Pick a game and have fun!</CrayonText></p>
               </div>
             </div>
-            <<div className="flex gap-2">
+            <div className="flex gap-2">
   <button onClick={() => { rotatePaper(); setPage("game"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-[-3deg]"><Trophy className="h-7 w-7" /></button>
   <button onClick={() => { rotatePaper(); setPage("passport"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-1"><Map className="h-7 w-7" /></button>
   <button onClick={() => { rotatePaper(); setPage("journal"); }} className="rounded-2xl border-2 border-slate-950 bg-yellow-100 p-3 shadow-[4px_4px_0_rgba(15,23,42,.85)] rotate-[-2deg]"><NotebookTabs className="h-7 w-7" /></button>

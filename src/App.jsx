@@ -388,8 +388,13 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pb-8">
-        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Goals</MarkerTitle></h2><p className="text-xl font-black mt-3">Coming soon.</p></HandCard>
-        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2><p className="text-xl font-black mt-3">{unlockedCount}/{STICKERS.length} unlocked.</p></HandCard>
+<HandCard className="p-6 space-y-3">
+  <h2 className="text-3xl"><MarkerTitle>Goals</MarkerTitle></h2>
+  <p className="text-xl font-black">XP: {stats.xp || 0}</p>
+  <p className="text-xl font-black">Road Tokens: {stats.roadTokens || 0}</p>
+  <p className="text-lg font-black text-slate-700">More goals coming soon.</p>
+</HandCard>
+                <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2><p className="text-xl font-black mt-3">{unlockedCount}/{STICKERS.length} unlocked.</p></HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2><p className="text-xl font-black mt-3">{stats.gamesPlayed} games played.</p></HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>
       </div>

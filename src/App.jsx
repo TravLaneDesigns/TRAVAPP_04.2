@@ -112,7 +112,18 @@ appOpens: 0,
 journalOpens: 0,
 stickersCollected: 0,
 };
-
+const STATES = [
+  {
+    id: "PA",
+    name: "Pennsylvania",
+    nickname: "Keystone State",
+    capital: "Harrisburg",
+    statehood: "December 12, 1787",
+    bird: "Ruffed Grouse",
+    flower: "Mountain Laurel",
+    funFact: "Home to Independence Hall and the Liberty Bell."
+  }
+];
 function Button({ children, onClick, className = "", type = "button" }) {
   return <button type={type} onClick={onClick} className={className}>{children}</button>;
 }
@@ -357,6 +368,7 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
 }
 
 function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
+  const state = STATES[0];
   return (
     <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
       <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
@@ -370,10 +382,14 @@ function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
       </div>
 
       <HandCard className="p-6 space-y-3">
-        <h2 className="text-3xl"><MarkerTitle>State Passport</MarkerTitle></h2>
-        <p className="text-xl font-black">States Collected: {stats.statesCollected?.length || 0}/50</p>
-        <p className="text-xl font-black text-slate-700">State stamps, fun facts, and the living map will live here.</p>
-      </HandCard>
+  <h2 className="text-4xl"><MarkerTitle>{state.name}</MarkerTitle></h2>
+  <p className="text-xl font-black">Nickname: {state.nickname}</p>
+  <p className="text-xl font-black">Capital: {state.capital}</p>
+  <p className="text-xl font-black">Statehood: {state.statehood}</p>
+  <p className="text-xl font-black">Bird: {state.bird}</p>
+  <p className="text-xl font-black">Flower: {state.flower}</p>
+  <p className="text-xl font-black">Fun Fact: {state.funFact}</p>
+</HandCard>
     </NotebookPage>
   );
 }

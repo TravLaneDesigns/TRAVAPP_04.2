@@ -113,6 +113,7 @@ journalOpens: 0,
 stickersCollected: 0,
 };
 const STATES = [
+  const STATES = [
   {
     id: "PA",
     name: "Pennsylvania",
@@ -122,7 +123,38 @@ const STATES = [
     bird: "Ruffed Grouse",
     flower: "Mountain Laurel",
     funFact: "Home to Independence Hall and the Liberty Bell."
+  },
+  {
+    id: "OH",
+    name: "Ohio",
+    nickname: "Buckeye State",
+    capital: "Columbus",
+    statehood: "March 1, 1803",
+    bird: "Northern Cardinal",
+    flower: "Scarlet Carnation",
+    funFact: "Home of the Rock and Roll Hall of Fame."
+  },
+  {
+    id: "NY",
+    name: "New York",
+    nickname: "Empire State",
+    capital: "Albany",
+    statehood: "July 26, 1788",
+    bird: "Eastern Bluebird",
+    flower: "Rose",
+    funFact: "Home of the Statue of Liberty."
+  },
+  {
+    id: "MD",
+    name: "Maryland",
+    nickname: "Old Line State",
+    capital: "Annapolis",
+    statehood: "April 28, 1788",
+    bird: "Baltimore Oriole",
+    flower: "Black-Eyed Susan",
+    funFact: "Home of the U.S. Naval Academy."
   }
+];
 ];
 function Button({ children, onClick, className = "", type = "button" }) {
   return <button type={type} onClick={onClick} className={className}>{children}</button>;
@@ -368,7 +400,8 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
 }
 
 function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
-  const state = STATES[0];
+  const [stateIndex, setStateIndex] = useState(0);
+const state = STATES[stateIndex];
   return (
     <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
       <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
@@ -382,8 +415,25 @@ function PassportPage({ setPage, paperVariant, rotatePaper, stats }) {
       </div>
 
       <HandCard className="p-6 space-y-3">
-  <h2 className="text-4xl"><MarkerTitle>{state.name}</MarkerTitle></h2>
-  <p className="text-xl font-black">Nickname: {state.nickname}</p>
+<div className="flex items-center gap-3 flex-wrap">
+  <button
+    onClick={() => setStateIndex((stateIndex - 1 + STATES.length) % STATES.length)}
+    className="rounded-xl border-2 border-slate-950 bg-yellow-100 px-3 py-1"
+  >
+    ◀
+  </button>
+
+  <h2 className="text-4xl">
+    <MarkerTitle>{state.name}</MarkerTitle>
+  </h2>
+
+  <button
+    onClick={() => setStateIndex((stateIndex + 1) % STATES.length)}
+    className="rounded-xl border-2 border-slate-950 bg-yellow-100 px-3 py-1"
+  >
+    ▶
+  </button>
+</div>  <p className="text-xl font-black">Nickname: {state.nickname}</p>
   <p className="text-xl font-black">Capital: {state.capital}</p>
   <p className="text-xl font-black">Statehood: {state.statehood}</p>
   <p className="text-xl font-black">Bird: {state.bird}</p>

@@ -66,6 +66,13 @@ const STICKERS = [
   { id: "rpsChampion", icon: "✂️", name: "RPS Champion", rule: "Win 25 rounds", unlocked: (stats) => stats.rpsWins >= 25 },
   { id: "dinoDriver", icon: "🦖", name: "Dino Driver", rule: "Play 25 games", unlocked: (stats) => stats.gamesPlayed >= 25 },
   { id: "roadWarrior", icon: "🌟", name: "Road Warrior", rule: "Play 100 games", unlocked: (stats) => stats.gamesPlayed >= 100 },
+    { id: "stateHopper", icon: "🗺️", name: "State Hopper", rule: "Collect 5 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 5 },
+  { id: "streetSweeper", icon: "🧹", name: "Street Sweeper", rule: "Collect 10 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 10 },
+  { id: "roadHog", icon: "🐷", name: "Road Hog", rule: "Collect 20 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 20 },
+  { id: "crossCountryCruiser", icon: "🚗", name: "Cross-Country Cruiser", rule: "Collect 25 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 25 },
+  { id: "highwayMan", icon: "🛣️", name: "Highway Man", rule: "Collect 30 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 30 },
+  { id: "interstateMaster", icon: "👑", name: "Interstate Master", rule: "Collect 40 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 40 },
+  { id: "greatAmericanRoadTrip", icon: "🇺🇸", name: "Great American Road Trip", rule: "Collect all 50 state stamps", unlocked: (stats) => (stats.statesCollected?.length || 0) >= 50 },
 ];
 
 const RULES = {
@@ -394,7 +401,12 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
   <p className="text-xl font-black">Road Tokens: {stats.roadTokens || 0}</p>
   <p className="text-lg font-black text-slate-700">More goals coming soon.</p>
 </HandCard>
-                <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2><p className="text-xl font-black mt-3">{unlockedCount}/{STICKERS.length} unlocked.</p></HandCard>
+                <HandCard className="p-6 space-y-2">
+  <h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2>
+  <p className="text-xl font-black">{unlockedCount}/{STICKERS.length} unlocked.</p>
+  <p className="text-lg font-black">State Stamps: {stats.statesCollected?.length || 0}/50</p>
+  <p className="text-lg font-black text-slate-700">Next: State Hopper at 5 stamps.</p>
+</HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2><p className="text-xl font-black mt-3">{stats.gamesPlayed} games played.</p></HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>
       </div>

@@ -380,6 +380,7 @@ function SettingsPage({ setPage, paperVariant, rotatePaper, settings, updateSett
   );
 }
 function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
+  const unlockedCount = STICKERS.filter((s) => s.unlocked(stats)).length;
   const stateStampCount = stats.statesCollected?.length || 0;
 
 const nextStateMilestone =

@@ -380,7 +380,17 @@ function SettingsPage({ setPage, paperVariant, rotatePaper, settings, updateSett
   );
 }
 function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
-  const unlockedCount = STICKERS.filter((s) => s.unlocked(stats)).length;
+  const stateStampCount = stats.statesCollected?.length || 0;
+
+const nextStateMilestone =
+  stateStampCount < 5 ? "Next: State Hopper at 5 stamps." :
+  stateStampCount < 10 ? "Next: Street Sweeper at 10 stamps." :
+  stateStampCount < 20 ? "Next: Road Hog at 20 stamps." :
+  stateStampCount < 25 ? "Next: Cross-Country Cruiser at 25 stamps." :
+  stateStampCount < 30 ? "Next: Highway Man at 30 stamps." :
+  stateStampCount < 40 ? "Next: Interstate Master at 40 stamps." :
+  stateStampCount < 50 ? "Next: Great American Road Trip at 50 stamps." :
+  "All state milestones completed!";
 
   return (
     <NotebookPage paperVariant={paperVariant} ownerName={stats.ownerName}>
@@ -405,7 +415,7 @@ function GAMEPage({ setPage, paperVariant, rotatePaper, stats }) {
   <h2 className="text-3xl"><MarkerTitle>Achievements</MarkerTitle></h2>
   <p className="text-xl font-black">{unlockedCount}/{STICKERS.length} unlocked.</p>
   <p className="text-lg font-black">State Stamps: {stats.statesCollected?.length || 0}/50</p>
-  <p className="text-lg font-black text-slate-700">Next: State Hopper at 5 stamps.</p>
+ <p className="text-lg font-black text-slate-700">{nextStateMilestone}</p>
 </HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2><p className="text-xl font-black mt-3">{stats.gamesPlayed} games played.</p></HandCard>
         <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>

@@ -159,7 +159,7 @@ const STATES = [
     bird: "Baltimore Oriole",
     flower: "Black-Eyed Susan",
     funFact: "Home of the U.S. Naval Academy."
-  }
+  },
   {
   id: "NJ",
   name: "New Jersey",

@@ -160,6 +160,16 @@ const STATES = [
     flower: "Black-Eyed Susan",
     funFact: "Home of the U.S. Naval Academy."
   }
+  {
+  id: "NJ",
+  name: "New Jersey",
+  nickname: "Garden State",
+  capital: "Trenton",
+  statehood: "December 18, 1787",
+  bird: "Eastern Goldfinch",
+  flower: "Purple Violet",
+  funFact: "New Jersey has the highest population density of any U.S. state."
+},
 ];
 function Button({ children, onClick, className = "", type = "button" }) {
   return <button type={type} onClick={onClick} className={className}>{children}</button>;

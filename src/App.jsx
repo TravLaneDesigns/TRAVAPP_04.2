@@ -428,8 +428,14 @@ const nextStateMilestone =
   <p className="text-lg font-black">State Stamps: {stats.statesCollected?.length || 0}/50</p>
  <p className="text-lg font-black text-slate-700">{nextStateMilestone}</p>
 </HandCard>
-        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2><p className="text-xl font-black mt-3">{stats.gamesPlayed} games played.</p></HandCard>
-        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>
+<HandCard className="p-6 space-y-2">
+  <h2 className="text-3xl"><MarkerTitle>Milestones</MarkerTitle></h2>
+  <p className="text-xl font-black">{stats.gamesPlayed} games played.</p>
+  <p className="text-lg font-black">{stateStampCount >= 5 ? "✅" : "⬜"} State Hopper - 5 states</p>
+  <p className="text-lg font-black">{stateStampCount >= 10 ? "✅" : "⬜"} Street Sweeper - 10 states</p>
+  <p className="text-lg font-black">{stateStampCount >= 20 ? "✅" : "⬜"} Road Hog - 20 states</p>
+  <p className="text-lg font-black">{stateStampCount >= 25 ? "✅" : "⬜"} Cross-Country Cruiser - 25 states</p>
+</HandCard>        <HandCard className="p-6"><h2 className="text-3xl"><MarkerTitle>Extras</MarkerTitle></h2><p className="text-xl font-black mt-3">Sounds, rewards, and secrets later.</p></HandCard>
       </div>
     </NotebookPage>
   );

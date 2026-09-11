@@ -17,7 +17,8 @@
 - [x] Rock Paper Scissors
 
 ## Passport
-- [x] State selector
+- [x] State selector arrows
+- [x] Fast 50-state dropdown selector
 - [x] State information format
 - [x] Add Stamp button
 - [x] Collected-state check
@@ -25,19 +26,22 @@
 - [x] XP reward for first stamp
 - [x] Road Token reward for first stamp
 - [x] Full 50-state data module created
-- [ ] Wire `src/data/states.js` into `App.jsx`
-- [ ] Verify all 50 state entries in the live Passport
+- [x] Wire full state database into production build
+- [x] Confirm production artifact contains the 50-state database
+- [ ] Manually verify representative state pages in the live Passport
 
 ## State Progression
 - [x] State Hopper - 5
 - [x] Street Sweeper - 10
 - [x] Road Hog - 20
 - [x] Cross-Country Cruiser - 25
-- [x] Highway Man - 30 logic
-- [x] Interstate Master - 40 logic
-- [x] Great American Road Trip - 50 logic
-- [ ] Show 30/40/50 milestones on G.A.M.E. card
-- [ ] Add Cartographer's Pencil reward display
+- [x] Highway Man - 30
+- [x] Interstate Master - 40
+- [x] Great American Road Trip - 50
+- [x] Show 30/40/50 milestones on G.A.M.E. card
+- [x] Cartographer's Pencil progression logic
+- [x] Cartographer's Pencil status display
+- [x] Coast To Coast helper logic
 
 ## Rewards / Stickers
 - [x] Existing achievement sticker engine
@@ -45,32 +49,46 @@
 - [x] Mythic catalog data created
 - [x] Secret achievement data module created
 - [x] State milestone reward data module created
-- [ ] Wire expanded sticker catalog into live Sticker Book
-- [ ] Add state reward sticker notifications
+- [x] Farm Friends data supports any 5 of cow/chicken/dog/cat/owl/horse for Barn reward
+- [ ] Decide whether expanded collectible Sticker Catalog ships fully wired in V1.0 or V1.x
+- [ ] Add optional unlock celebration/notification pass if included in V1.0
 
 ## Landmarks
 - [x] Landmark data module created
 - [ ] Decide whether landmarks ship in V1.0 or V1.x
 - [ ] Wire landmark collection if included in V1.0
 
-## Testing
-- [ ] Test fresh save
+## Automated Testing / Deployment
+- [x] Validate exactly 50 states and required Passport fields
+- [x] Validate milestone sequence (5/10/20/25/30/40/50)
+- [x] Validate unique landmark/sticker/secret-achievement IDs
+- [x] Validate sticker rarities and Sticker Set references
+- [x] Progression smoke tests for milestones
+- [x] Progression smoke tests for Cartographer's Pencil tiers
+- [x] Progression smoke tests for Coast To Coast
+- [x] Run validation and progression tests before production build
+- [x] Successful GitHub Pages production build after Passport integration
+- [x] Production artifact verified to contain full-state Passport and final milestone UI text
+
+## Manual V1 QA
+- [ ] Test fresh save in browser
 - [ ] Test existing save migration
 - [ ] Test all five games
-- [ ] Test all 50 state pages
+- [ ] Spot-check state data/pages across several regions
 - [ ] Test duplicate state stamp prevention
-- [ ] Test XP / Road Token totals
-- [ ] Test 5/10/20/25/30/40/50 milestone changes
+- [ ] Test XP / Road Token totals after stamping
+- [ ] Test milestone changes with actual saved progress
 - [ ] Test Sticker Book unlock counts
 - [ ] Test phone layout
 - [ ] Test tablet layout
 - [ ] Test desktop layout
-- [ ] Final GitHub Pages deployment check
+- [ ] Final visual approval
 
 ## Post-V1 / Expansion Vault
 - Living Map
 - Coast-to-Coast drawn route lines
-- Landmark collection expansion
+- Landmark collection expansion (if deferred)
+- Expanded collectible Sticker Catalog (if deferred)
 - Rocco's Sticker Swap
 - P.O.O.P. daily goals
 - Road Trip Crew random events

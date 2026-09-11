@@ -36,6 +36,10 @@ export const VEHICLE_STICKERS = [
 export const ANIMAL_STICKERS = [
   { id: "dog", name: "Dog", rarity: "Common" },
   { id: "cat", name: "Cat", rarity: "Common" },
+  { id: "cow", name: "Cow", rarity: "Common" },
+  { id: "chicken", name: "Chicken", rarity: "Common" },
+  { id: "horse", name: "Horse", rarity: "Common" },
+  { id: "owl", name: "Owl", rarity: "Common" },
   { id: "rabbit", name: "Rabbit", rarity: "Common" },
   { id: "squirrel", name: "Squirrel", rarity: "Common" },
   { id: "duck", name: "Duck", rarity: "Common" },
@@ -103,7 +107,10 @@ export const STICKER_SETS = [
   {
     id: "farm-friends",
     name: "Farm Friends",
-    requires: ["cow", "chicken", "farm-dog", "barn-cat", "horse"],
+    requiresAny: {
+      ids: ["cow", "chicken", "dog", "cat", "owl", "horse"],
+      count: 5,
+    },
     reward: "Barn Sticker",
   },
   {

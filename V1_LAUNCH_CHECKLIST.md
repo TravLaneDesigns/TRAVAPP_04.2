@@ -80,10 +80,10 @@
 ## Manual V1 QA
 - [ ] Test fresh save in browser
 - [x] Existing save survived Passport/state progression upgrade
-- [ ] Play-test all five games on current production build
+- [x] Play-test all five games on current production build
 - [x] Live Passport / G.A.M.E. visual approval on phone
-- [ ] Test duplicate state stamp prevention manually
-- [ ] Confirm XP / Road Token totals after one new stamp
+- [x] Test duplicate state stamp prevention manually
+- [x] Confirm XP / Road Token totals after one new stamp
 - [ ] Test milestone changes with actual saved progress beyond 5 states
 - [ ] Test Sticker Book unlock count after a new milestone
 - [x] Phone layout visually approved for Passport/G.A.M.E.

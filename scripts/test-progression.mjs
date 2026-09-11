@@ -28,8 +28,8 @@ expect(getCartographerPencilTier([...LOWER_48_STATES, "AK"])?.id === "cartograph
 expect(getCartographerPencilTier([...LOWER_48_STATES, "HI"])?.id === "cartographerGold", "Lower 48 plus Hawaii should award Gold Pencil.");
 expect(getCartographerPencilTier([...LOWER_48_STATES, "AK", "HI"])?.id === "cartographerSparkling", "All 50 should award Sparkling Pencil.");
 
-expect(hasCoastToCoast(["PA", "CA"]), "Atlantic plus Pacific should trigger Coast To Coast.");
-expect(!hasCoastToCoast(["PA", "OH"]), "No Pacific state should not trigger Coast To Coast.");
+expect(hasCoastToCoast(["NJ", "CA"]), "Atlantic plus Pacific should trigger Coast To Coast.");
+expect(!hasCoastToCoast(["PA", "OH"]), "No qualifying coast pair should not trigger Coast To Coast.");
 
 expect(STATE_MILESTONES.length === 7, "There should be seven state milestones.");
 

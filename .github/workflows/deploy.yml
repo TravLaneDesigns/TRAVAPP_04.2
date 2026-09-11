@@ -32,6 +32,9 @@ jobs:
       - name: Validate data
         run: npm run validate:data
 
+      - name: Test progression
+        run: npm run test:progression
+
       - name: Build
         run: npm run build
 

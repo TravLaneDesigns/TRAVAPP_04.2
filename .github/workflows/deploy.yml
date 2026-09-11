@@ -35,6 +35,9 @@ jobs:
       - name: Test progression
         run: npm run test:progression
 
+      - name: Test app integration
+        run: npm run test:integration
+
       - name: Build
         run: npm run build
 

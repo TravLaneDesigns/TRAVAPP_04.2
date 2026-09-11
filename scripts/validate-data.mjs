@@ -1,7 +1,11 @@
 import { STATES } from "../src/data/states.js";
 import { STATE_MILESTONES } from "../src/data/stateMilestones.js";
 import { LANDMARKS } from "../src/data/landmarks.js";
-import { STICKER_CATALOG } from "../src/data/stickerCatalog.js";
+import {
+  STICKER_CATALOG,
+  STICKER_RARITIES,
+  STICKER_SETS,
+} from "../src/data/stickerCatalog.js";
 import { SECRET_ACHIEVEMENTS } from "../src/data/secretAchievements.js";
 
 const errors = [];
@@ -31,11 +35,28 @@ const uniqueById = (items, label) => {
     if (seen.has(item.id)) errors.push(`Duplicate ${label} id: ${item.id}`);
     seen.add(item.id);
   }
+  return seen;
 };
 
 uniqueById(LANDMARKS, "landmark");
-uniqueById(STICKER_CATALOG, "sticker");
+const stickerIds = uniqueById(STICKER_CATALOG, "sticker");
 uniqueById(SECRET_ACHIEVEMENTS, "secret achievement");
+
+for (const sticker of STICKER_CATALOG) {
+  if (!STICKER_RARITIES.includes(sticker.rarity)) {
+    errors.push(`Sticker ${sticker.id} has invalid rarity: ${sticker.rarity}`);
+  }
+}
+
+for (const set of STICKER_SETS) {
+  const requiredIds = set.requires || set.requiresAny?.ids || [];
+  for (const id of requiredIds) {
+    if (!stickerIds.has(id)) errors.push(`Sticker set ${set.id} references missing sticker: ${id}`);
+  }
+  if (set.requiresAny && (set.requiresAny.count < 1 || set.requiresAny.count > set.requiresAny.ids.length)) {
+    errors.push(`Sticker set ${set.id} has an invalid requiresAny count.`);
+  }
+}
 
 if (errors.length) {
   console.error("F.A.R.T. data validation failed:\n");
@@ -48,4 +69,5 @@ console.log(`States: ${STATES.length}`);
 console.log(`State milestones: ${STATE_MILESTONES.length}`);
 console.log(`Landmarks: ${LANDMARKS.length}`);
 console.log(`Stickers: ${STICKER_CATALOG.length}`);
+console.log(`Sticker sets: ${STICKER_SETS.length}`);
 console.log(`Secret achievements: ${SECRET_ACHIEVEMENTS.length}`);

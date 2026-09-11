@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "validate:data": "node scripts/validate-data.mjs",
-    "test:progression": "node scripts/test-progression.mjs"
+    "test:progression": "node scripts/test-progression.mjs",
+    "test:integration": "node scripts/test-app-integration.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",

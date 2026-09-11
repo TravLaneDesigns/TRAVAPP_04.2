@@ -15,6 +15,11 @@ export function fartV1Bridge() {
       if (!localStatesPattern.test(next)) throw new Error("F.A.R.T. V1 bridge could not find the temporary local STATES array in App.jsx.");
       next = next.replace(localStatesPattern, "function Button");
 
+      const markerAnchor = 'function CrayonText({ children, className = "" }) {';
+      if (!next.includes(markerAnchor)) throw new Error("F.A.R.T. V1 bridge could not find CrayonText for marker styling.");
+      const homeMarkerComponent = `function HomeMarkerText({ children, className = "" }) {\n  return (\n    <span className={\`inline-block ${className}\`} style={{ fontFamily: '\"Arial Black\", \"Trebuchet MS\", sans-serif', fontWeight: 900, letterSpacing: '-0.045em', WebkitTextStroke: '0.35px currentColor' }}>\n      <WobblyText marker className=\"font-black uppercase\">{children}</WobblyText>\n    </span>\n  );\n}\n\n`;
+      next = next.replace(markerAnchor, homeMarkerComponent + markerAnchor);
+
       const stateCountLine = "  const stateStampCount = stats.statesCollected?.length || 0;";
       if (!next.includes(stateCountLine)) throw new Error("F.A.R.T. V1 bridge could not find stateStampCount in GAMEPage.");
       next = next.replace(stateCountLine, `${stateCountLine}\n  const pencilTier = getCartographerPencilTier(stats.statesCollected || []);`);
@@ -33,14 +38,22 @@ export function fartV1Bridge() {
 
       next = next.replace('<MarkerTitle>Coming Later</MarkerTitle></h2><p className="text-xl font-bold text-slate-700 mt-2">States visited, Road Trip Passport, and Interstate Explorer will live here when we build Version 1.5.</p>', '<MarkerTitle>Passport Progress</MarkerTitle></h2><p className="text-xl font-bold text-slate-700 mt-2">State stamps, XP, Road Tokens, and road-trip milestones are now tracked in Version 1.</p>');
 
-      // V1 home-page art pass: marker for prominent writing, pen for supporting notes.
+      const coverStart = next.indexOf("function CoverPage(");
+      const ownerStart = next.indexOf("function OwnerPage(");
+      if (coverStart === -1 || ownerStart === -1 || ownerStart <= coverStart) throw new Error("F.A.R.T. V1 bridge could not isolate the CoverPage component.");
+      let cover = next.slice(coverStart, ownerStart);
+      cover = cover.replaceAll("<MarkerTitle>", "<HomeMarkerText>").replaceAll("</MarkerTitle>", "</HomeMarkerText>");
+      cover = cover.replace('<p className="text-2xl text-slate-800 rotate-[-2deg]"><CrayonText>games for the road</CrayonText></p>', '<p className="text-2xl text-slate-900 rotate-[-2deg] font-semibold italic tracking-wide">games for the road</p>');
+      next = next.slice(0, coverStart) + cover + next.slice(ownerStart);
+
       const homeStart = next.indexOf("function Home(");
       const settingsStart = next.indexOf("function SettingsPage(");
       if (homeStart === -1 || settingsStart === -1 || settingsStart <= homeStart) throw new Error("F.A.R.T. V1 bridge could not isolate the Home component.");
       let home = next.slice(homeStart, settingsStart);
+      home = home.replaceAll("<MarkerTitle>", "<HomeMarkerText>").replaceAll("</MarkerTitle>", "</HomeMarkerText>");
       home = home.replace('<p className="text-slate-700 mt-1 text-lg"><CrayonText>Pick a game and have fun!</CrayonText></p>', '<p className="text-slate-800 mt-2 text-lg font-semibold italic tracking-wide rotate-[-1deg]">Pick a game and have fun!</p>');
       home = home.replace('<span className="text-slate-800"><CrayonText>🚗 road trip games • {unlockedCount}/{STICKERS.length} stickers</CrayonText></span>', '<span className="text-slate-800 font-semibold italic tracking-wide">🚗 road trip games • {unlockedCount}/{STICKERS.length} stickers</span>');
-      home = home.replace('<h2 className="text-2xl underline decoration-blue-500 decoration-2 underline-offset-4"><CrayonText>{game.title}</CrayonText></h2>', '<h2 className="text-2xl underline decoration-blue-500 decoration-2 underline-offset-4"><MarkerTitle>{game.title}</MarkerTitle></h2>');
+      home = home.replace('<h2 className="text-2xl underline decoration-blue-500 decoration-2 underline-offset-4"><CrayonText>{game.title}</CrayonText></h2>', '<h2 className="text-2xl underline decoration-blue-500 decoration-2 underline-offset-4"><HomeMarkerText>{game.title}</HomeMarkerText></h2>');
       home = home.replace('<p className="text-slate-700 mt-3 text-lg"><CrayonText>{game.desc}</CrayonText></p><p className="mt-5 text-slate-950"><CrayonText>Play →</CrayonText></p>', '<p className="text-slate-700 mt-3 text-lg font-medium italic tracking-wide">{game.desc}</p><p className="mt-5 text-slate-950 font-bold italic tracking-wide">Play →</p>');
       next = next.slice(0, homeStart) + home + next.slice(settingsStart);
 

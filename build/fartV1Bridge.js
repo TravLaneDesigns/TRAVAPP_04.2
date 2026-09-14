@@ -39,8 +39,11 @@ export function fartV1Bridge() {
       if (coverStart < 0 || ownerStart <= coverStart) throw new Error("Could not isolate CoverPage.");
       let cover = next.slice(coverStart, ownerStart);
       cover = cover.replaceAll("<MarkerTitle>", "<HomeMarkerText>").replaceAll("</MarkerTitle>", "</HomeMarkerText>");
+      const coverTitleBlock = `<h1 className="text-6xl sm:text-8xl font-black leading-none uppercase drop-shadow-sm">\n            <span className="text-blue-700 block rotate-[-4deg]"><HomeMarkerText>FuN?</HomeMarkerText></span>\n            <span className="text-red-700 block rotate-[2deg]"><HomeMarkerText>ALwaYs!</HomeMarkerText></span>\n            <span className="text-green-700 block rotate-[-1deg]"><HomeMarkerText>RoAd TRiP!</HomeMarkerText></span>\n          </h1>`;
+      const coverArt = `<div className="relative mx-auto w-[82vw] max-w-[560px] overflow-hidden rounded-2xl rotate-[-1deg] shadow-sm">\n            <img src="https://raw.githubusercontent.com/TravLaneDesigns/TRAVAPP_04.2/main/cover-title.jpg" alt="FUN? ALWAYS! ROAD TRIP! hand-drawn marker title" className="block w-full h-auto mix-blend-multiply" />\n          </div>`;
+      if (!cover.includes(coverTitleBlock)) throw new Error("Could not find cover title block for artwork swap.");
+      cover = cover.replace(coverTitleBlock, coverArt);
       cover = cover.replace('<p className="text-2xl text-slate-800 rotate-[-2deg]"><CrayonText>games for the road</CrayonText></p>', '<p className="text-xl sm:text-2xl text-slate-900 rotate-[-2deg] tracking-wide [font-family:Trebuchet_MS,Arial,sans-serif]">games for the road ☺</p>');
-      cover = cover.replace('</h1>\n          <p className="text-xl', '</h1>\n          <div className="mx-auto w-4/5"><MarkerUnderline color="#dc2626" /></div>\n          <p className="text-xl');
       next = next.slice(0, coverStart) + cover + next.slice(ownerStart);
 
       const homeStart = next.indexOf("function Home(");
